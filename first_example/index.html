@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>First Vue Example</title>
+	<script src = "./../static/vue.js"></script>
+</head>
+<body>
+	<div v-once id="p1">{{ sayHello(" ") }} - {{ title }} - {{ changeValue() }} - {{ changeValue1() }}
+		<div id="p4">
+			{{ title }} ----------------- 
+		</div>
+		{{ title }}
+	</div>
+
+	<div id="p2">
+		{{ content }}
+		<span v-html="link"> abc </span>
+		<button v-on:click="warn('Chưa submit được form.', $event)">
+		  Submit
+		</button>
+	</div>
+
+	<div id="p3">
+		<input type="text" v-on:input="changeContent($event)">
+		<p>{{ content }}</p>
+		<img :id="img_id" v-bind:src="img" v-bind:alt="alt">
+	</div>
+
+	<div id="p5">
+		<div v-on:mousemove="Tanggiatri">
+			<div>
+				{{ x }} / {{ y }}
+			</div>
+			<br>
+			<div v-on:mousemove.prevent="InRaGiDo">
+				Hay di chuyen chuot vao day de xem dieu gi xay ra nhe.
+			</div>
+			<br>
+			ahihi
+			<br>
+			<br>
+		</div>
+	</div>
+</body>
+</html>
+
+<script>
+	new Vue({
+		el: '#p1',
+		data: {
+			title: 'Hello World!',
+			content: 'This is the first Vue examlple'
+		},
+		methods: {
+			sayHello: function(b) {
+				return this.title + b + this.content;
+			},
+			changeValue: function() {
+				this.title = 'Gia tri moi';
+				return this.title
+			},
+			changeValue1: function() {
+				this.title = 'Gia tri moi nua';
+				return this.title
+			}
+		}
+	});
+
+	new Vue({
+		el :'#p4',
+		data: {
+			hi: 'haha'
+		}
+	});
+
+
+	new Vue({
+		el: '#p2',
+		data: {
+			content: 'My name is Thuy',
+			link: '<a href="http://google.com.vn">Google</a>'
+		},
+		methods: {
+			warn: function (message, event) {
+			    if (event) {
+			    	console.log(event)
+			    	event.preventDefault()
+			    }
+			    alert(message)
+			}
+		}
+	});
+
+	new Vue({
+		el: '#p3',
+		data: {
+			content: 'Nothing',
+			img_id: 'img1',
+			img: 'https://photo2.tinhte.vn/data/attachment-files/2015/07/3097106_Camera.Tinhte_Fly_Agaric_in_forest_by_Stefan_Holm.jpeg',
+			alt: 'plan'
+		},
+		methods: {
+			changeContent: function(event) {
+				this.content = event.target.value;
+			}
+		}
+	})
+
+	new Vue({
+		el: '#p5',
+		data: {
+			x: 0,
+			y: 0
+		},
+		methods: {
+			Tanggiatri: function(event) {
+				this.x = event.clientX
+				this.y = event.clientY
+			},
+			InRaGiDo: function() {
+				console.log('Hello')
+			}
+		}
+	})
+</script>
+

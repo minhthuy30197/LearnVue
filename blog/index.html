@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My Blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/vue.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-default bg-4">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">Me</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">WHO</a></li>
+          <li><a href="#">WHAT</a></li>
+          <li><a href="#">WHERE</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Body -->
+  <div class="container-fluid margin0" id="post">
+     <div class="row margin0">
+      <div class="col-lg-8 col-lg-push-2 col-md-10 col-md-push-1">
+        <!-- Post content -->
+        <div class="content">
+          <h1 class="title">{{ post.title }}</h1>
+          {{ post.author }} - {{ post.timePublish }}
+          <hr>
+          {{ post.content }}
+          <hr>
+          <div class="action-btns">
+            <button class="btn btn-primary" @click='UpdatePost'>Chỉnh sửa</button>
+            <button class="btn btn-danger" @click='DeletePost'>Xóa</button>
+          </div>
+        </div>
+        <br>
+
+        <!-- Comments -->
+        <div v-for="c in post.comments">
+          <div class="content" :key="c.commentId">
+            <div class="comment clearfix">
+              <div class="left-content">Họ tên</div>
+              <div class="right-content">{{ c.username }}</div>
+            </div>
+            <div class="comment clearfix">
+              <div class="left-content">Email</div>
+              <div class="right-content">{{ c.email }}</div>
+            </div>           
+            {{ c. content }}
+          </div>
+        </div>
+        <br>
+
+        <!-- Insert new comment -->
+        <div class="content">
+          <form action="" class="form-horizontal">
+            <div class="in clearfix">
+              <div class="left-content">Họ tên</div>
+              <div class="right-content">
+                <input type="text" id="username" v-model="username">
+              </div>
+            </div>
+            <div class="in clearfix">
+              <div class="left-content">Email</div>
+              <div class="right-content">
+                <input type="email" id="email" v-model="email">
+              </div>
+            </div>
+            <div class="in clearfix">
+                <div class="left-content">Bình luận</div>
+                <div class="right-content">
+                  <textarea id="comment" class="col-sm-10" v-model="comment"></textarea>    
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>    
+  </div> 
+
+  <!-- Footer -->
+  <footer class="container-fluid bg-4 text-center">
+    <p>Bootstrap Theme Made By <a href="https://www.w3schools.com">www.w3schools.com</a></p> 
+  </footer>
+</body>
+
+<script src="js/script.js"></script>
+
+</html>
